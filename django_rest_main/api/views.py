@@ -22,7 +22,7 @@ def studentsviews(request):
       print(serializer)
       return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)        
 
-@api_view(['GET']) 
+@api_view(['GET','PUT','DELETE']) 
 def studentDetail(request,pk):
    try:
       students = student.objects.get(pk=pk)
@@ -32,3 +32,13 @@ def studentDetail(request,pk):
    if request.method == 'GET':
       Serializer = studentSerializer(students)
       return Response(Serializer.data,status=status.HTTP_200_OK)
+   elif request.method == 'PUT':
+      serializer = studentSerializer(data = request.data)  #same as post but model serializer sangai model pani diyo vane paticular student janxa jasle garda update garda sajilo hunxa
+      if serializer.is_valid():
+         serializer.save()
+         return Response(serializer,status=status.HTTP_200_OK)
+      else:
+         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+   elif request.method == 'delete':
+      student.delete
+      return Response(status=status.HTTP_204_NO_CONTENT)
