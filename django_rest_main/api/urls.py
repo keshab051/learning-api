@@ -6,5 +6,5 @@ urlpatterns = [
   path('students/<int:pk>',views.studentDetail),
 
   path('employee/',views.employe.as_view()),
-  # path('employee/<int:pk>',views.employedetail.as_view()),
+  path('employee/<int:pk>',views.employedetail.as_view()),
 ]
