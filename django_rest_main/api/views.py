@@ -93,7 +93,9 @@ def studentDetail(request,pk):
 
 # This is also class based api_view but using mixins
 
-'''in mixins generic will handel all http status and all other activities like serializing and all will be handeled by mixins'''
+'''in mixins generic will handel all http status and all other activities like serializing and all will be handeled by mixins
+
+
 class employees(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
    queryset = employee.objects.all()
    serializer_class = EmployeeSerializer
@@ -114,3 +116,12 @@ class employedetail( mixins.RetrieveModelMixin , mixins.UpdateModelMixin , mixin
       return self.update(request)
    def delete(self,request,pk):
       return self.destroy(request)
+
+    '''
+class employees(generics.ListAPIView,generics.CreateAPIView):
+   queryset = employee.objects.all()
+   serializer_class = EmployeeSerializer
+
+
+class employedetail(generics.RetrieveAPIView):
+   queryset
