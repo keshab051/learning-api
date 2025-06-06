@@ -124,4 +124,4 @@ class employees(generics.ListAPIView,generics.CreateAPIView):
 
 
 class employedetail(generics.RetrieveAPIView):
-   queryset
+   pass
