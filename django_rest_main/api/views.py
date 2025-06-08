@@ -26,6 +26,7 @@ def studentsviews(request):
       print(serializer)
       return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)        
 
+
 @api_view(['GET','PUT','DELETE']) 
 def studentDetail(request,pk):
    try:
@@ -123,5 +124,7 @@ class employees(generics.ListAPIView,generics.CreateAPIView):
    serializer_class = EmployeeSerializer
 
 
-class employedetail(generics.RetrieveAPIView):
-   pass
+class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics.DestroyAPIView):
+   queryset = employee.objects.all()
+   serializer_class = EmployeeSerializer
+   lookup_field = 'pk'
