@@ -7,4 +7,7 @@ urlpatterns = [
 
   path('employee/',views.employees.as_view()),
   path('employee/<int:pk>',views.employedetail.as_view()),
+
+  path('blog/', views.BlogViews.as_view()),
+  path('comment/', views.CommentViews.as_view()),
 ]
