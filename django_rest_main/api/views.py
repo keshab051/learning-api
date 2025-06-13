@@ -11,6 +11,7 @@ from django.http import Http404
 from rest_framework import mixins,generics
 from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer , CommentSerializer 
+from .paginations import CostumPagination
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -126,6 +127,7 @@ class employedetail( mixins.RetrieveModelMixin , mixins.UpdateModelMixin , mixin
 class employees(generics.ListAPIView,generics.CreateAPIView):
    queryset = employee.objects.all()
    serializer_class = EmployeeSerializer
+   
 
 
 class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics.DestroyAPIView):
@@ -140,6 +142,8 @@ class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics
 class BlogViews(generics.ListCreateAPIView):
    queryset = Blog.objects.all()
    serializer_class = BlogSerializer
+   pagination_class = CostumPagination
+   
 
 
 class CommentViews(generics.ListCreateAPIView):
