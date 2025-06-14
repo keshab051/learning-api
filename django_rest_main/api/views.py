@@ -12,6 +12,7 @@ from rest_framework import mixins,generics
 from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer , CommentSerializer 
 from .paginations import CostumPagination
+from Employees.filter import EmployeeFilter
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -127,7 +128,8 @@ class employedetail( mixins.RetrieveModelMixin , mixins.UpdateModelMixin , mixin
 class employees(generics.ListAPIView,generics.CreateAPIView):
    queryset = employee.objects.all()
    serializer_class = EmployeeSerializer
-   filterset_fields =['designation']
+   # filterset_fields =['designation'] this is only used for global filtering
+   filterset_class = EmployeeFilter
    
 
 
