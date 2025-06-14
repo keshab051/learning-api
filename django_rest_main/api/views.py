@@ -123,10 +123,11 @@ class employedetail( mixins.RetrieveModelMixin , mixins.UpdateModelMixin , mixin
 
     '''
 
-# generics views
+# employee views section with generics views
 class employees(generics.ListAPIView,generics.CreateAPIView):
    queryset = employee.objects.all()
    serializer_class = EmployeeSerializer
+   filterset_fields =['designation']
    
 
 
@@ -136,14 +137,11 @@ class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics
    lookup_field = 'pk'
 
 
-
-
-
+#blogs views section to show nested serialization
 class BlogViews(generics.ListCreateAPIView):
    queryset = Blog.objects.all()
    serializer_class = BlogSerializer
    pagination_class = CostumPagination
-   
 
 
 class CommentViews(generics.ListCreateAPIView):
