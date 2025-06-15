@@ -140,7 +140,7 @@ class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics
 
 
 #blogs views section to show nested serialization
-# also pagination costum pagination is in this views
+# also pagination custom pagination is in this views
 class BlogViews(generics.ListCreateAPIView):
    queryset = Blog.objects.all()
    serializer_class = BlogSerializer
