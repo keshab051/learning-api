@@ -13,6 +13,7 @@ from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer , CommentSerializer 
 from .paginations import CostumPagination
 from Employees.filter import EmployeeFilter
+from rest_framework.filters import SearchFilter,OrderingFilter
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -124,7 +125,7 @@ class employedetail( mixins.RetrieveModelMixin , mixins.UpdateModelMixin , mixin
 
     '''
 
-# employee views section with generics views
+# employee views section with generics views and custom filter implemented 
 class employees(generics.ListAPIView,generics.CreateAPIView):
    queryset = employee.objects.all()
    serializer_class = EmployeeSerializer
@@ -141,10 +142,18 @@ class employedetail(generics.RetrieveAPIView , generics.UpdateAPIView , generics
 
 #blogs views section to show nested serialization
 # also pagination custom pagination is in this views
+# And search filter is implemented
 class BlogViews(generics.ListCreateAPIView):
    queryset = Blog.objects.all()
    serializer_class = BlogSerializer
    pagination_class = CostumPagination
+   filter_backends = [SearchFilter,OrderingFilter] #'OrderingFilter' will used to order in ascending or des...
+   search_fields = ['Blog_title','Blog_body']
+   ordering_fields = ['id','Blog_title']
+#using caret '^' symbol at the starting of search field will only
+#check if there is the given word at the starting of that field
+#this 'SearchFilter' module will handle the case sensitiveness of the character
+#eg: search_fields = ['^Blog_title']
 
 
 class CommentViews(generics.ListCreateAPIView):
